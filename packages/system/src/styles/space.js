@@ -8,6 +8,7 @@ function toNegative(value) {
 }
 
 export const getSpace = themeGetter({
+  name: 'space',
   key: 'space',
   defaultVariants: [0, 4, 8, 16, 24, 48, 96, 144, 192, 240],
   transform: (_, { rawValue, variants }) => {

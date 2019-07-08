@@ -2,8 +2,9 @@ import { style, themeGetter, compose } from '../style'
 import { percent } from '../unit'
 
 export const getSize = themeGetter({
-  transform: percent,
+  name: 'size',
   key: 'sizes',
+  transform: percent,
 })
 
 export const display = style({

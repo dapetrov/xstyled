@@ -36,9 +36,14 @@ function getCacheNamespace(theme, namespace) {
 }
 
 let themeGetterId = 0
-export const themeGetter = ({ transform, key, defaultVariants }) => {
+export const themeGetter = ({
+  name,
+  transform: defaultTransform,
+  key,
+  defaultVariants,
+}) => {
   const id = themeGetterId++
-  return value => props => {
+  const getter = value => props => {
     if (!string(value) && !num(value)) return value
     const cache = getCacheNamespace(props.theme, `__themeGetter${id}`)
     if (cache.has(value)) return cache.get(value)
@@ -48,6 +53,10 @@ export const themeGetter = ({ transform, key, defaultVariants }) => {
       ? getThemeValue(props, value, variants)
       : null
     const computedValue = is(themeValue) ? themeValue : value
+    const transform =
+      (name && props.theme && props.theme.transformers
+        ? props.theme.transformers[name]
+        : null) || defaultTransform
     if (!transform) {
       cache.set(value, computedValue)
       return computedValue
@@ -59,6 +68,8 @@ export const themeGetter = ({ transform, key, defaultVariants }) => {
     cache.set(value, transformedValue)
     return transformedValue
   }
+  getter.meta = { name, transform: defaultTransform }
+  return getter
 }
 
 function styleFromValue(cssProperties, value, props, themeGet, cache) {

@@ -4,6 +4,7 @@ import { px, rpxPx } from '../unit'
 import { getColor, getRadius } from './basics'
 
 export const getBorder = themeGetter({
+  name: 'border',
   key: 'borders',
   transform: n => (num(n) && n > 0 ? `${px(n)} solid` : n),
 })
@@ -59,6 +60,7 @@ export const borderColor = style({
 })
 
 export const getBorderWidth = themeGetter({
+  name: 'borderWidth',
   key: 'borderWidths',
   transform: rpxPx,
 })
@@ -69,6 +71,7 @@ export const borderWidth = style({
 })
 
 export const getBorderStyle = themeGetter({
+  name: 'borderStyle',
   key: 'borderStyles',
 })
 
@@ -83,6 +86,7 @@ export const borderRadius = style({
 })
 
 export const getShadow = themeGetter({
+  name: 'shadow',
   key: 'shadows',
 })
 
